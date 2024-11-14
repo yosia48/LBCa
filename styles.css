@@ -10,6 +10,16 @@ body {
     background-color: #f9f9f9;
     color: #333;
     line-height: 1.6;
+
+     background-image: url('bg.png');
+    background-size: cover; /* Agar gambar mengisi seluruh halaman */
+    background-position: center; /* Menempatkan gambar di tengah */
+    height: 100vh; /* Agar latar belakang memenuhi tinggi layar */
+    margin: 0; /* Menghilangkan margin default */
+    display: flex; /* Menggunakan flexbox untuk memposisikan konten */
+    justify-content: center; /* Menyusun konten di tengah horizontal */
+    align-items: center; /* Menyusun konten di tengah vertikal */
+    font-family: Arial, sans-serif; /* Mengatur font halaman */
 }
 
 .container {
