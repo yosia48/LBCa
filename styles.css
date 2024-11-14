@@ -10,6 +10,9 @@ body {
     background-color: #f9f9f9;
     color: #333;
     line-height: 1.6;
+    background-image: url('bg.png'); /* Gambar latar belakang */
+    background-size: cover; /* Menyesuaikan ukuran gambar agar memenuhi halaman */
+    background-position: center; /* Menempatkan gambar di tengah */
 
 
 }
