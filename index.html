@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Balancing PCC (LB PCC) Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+
+  <!-- Rata-rata Speed ISP Section -->
+  <h1>Hitung Rata-rata Speed ISP</h1>
+
+<div class="isp-rates">
+    <div id="isp1" class="isp-rate">
+       <label for="isp1_min">ISP 1 Speed Minimum (Mbps):</label>
+        <input type="number" id="isp1_min" value="">
+        </div>
+
+
+    <div id="isp1" class="isp-rate">
+       <label for="isp1_max">ISP 1 Speed Maximum (Mbps):</label>
+        <input type="number" id="isp1_max" value="">
+    </div>
+
+    <div id="isp1" class="isp-rate">
+        <label for="isp2_min">ISP 2 Speed Minimum (Mbps):</label>
+        <input type="number" id="isp2_min" value="">
+    </div>
+  
+
+
+     <div id="isp1" class="isp-rate">
+        <label for="isp2_max">ISP 2 Speed Maximum (Mbps):</label>
+        <input type="number" id="isp2_max" value="">
+        </div>
+</div>
+  
+  <br><br>
+  
+  <button onclick="hitungRataRata()">Hitung Rata-rata</button>
+  
+  <h2>Hasil:</h2>
+  <p id="hasil"></p>
+
+
+  <br>
+
+
+
+        <h1>Load Balancing PCC (LB PCC) Calculator</h1>
+
+        <!-- Dropdown for selecting number of ISPs -->
+        <div class="form-group">
+            <label for="isp-count">Pilih Jumlah ISP:</label>
+            <select id="isp-count" onchange="toggleISPInputs()">
+                <option value="2">2 ISP</option>
+                <option value="3">3 ISP</option>
+                <option value="4">4 ISP</option>
+            </select>
+        </div>
+
+        <!-- Input Fields for WAN Speeds (hidden based on selection) -->
+        <div class="isp-inputs">
+            <div id="isp1" class="isp-input">
+                <label for="wan1-speed">WAN-1 Speed (Mbps):</label>
+                <input type="number" id="wan1-speed" value="">
+            </div>
+
+            <div id="isp2" class="isp-input">
+                <label for="wan2-speed">WAN-2 Speed (Mbps):</label>
+                <input type="number" id="wan2-speed" value="">
+            </div>
+
+            <div id="isp3" class="isp-input">
+                <label for="wan3-speed">WAN-3 Speed (Mbps):</label>
+                <input type="number" id="wan3-speed" value="">
+            </div>
+
+            <div id="isp4" class="isp-input">
+                <label for="wan4-speed">WAN-4 Speed (Mbps):</label>
+                <input type="number" id="wan4-speed" value="">
+            </div>
+        </div>
+
+        <!-- Calculate Button -->
+        <button onclick="calculatePCC()">Calculate</button>
+
+        <!-- Result Section -->
+        <div id="result" class="result">
+            <h2>LB PCC Calculation Result</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>WAN Identity</th>
+                        <th>WAN Speed (Mbps)</th>
+                        <th>Best Ratio (Mbps)</th>
+                        <th>Numerator</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="result-wan1">
+                        <td>WAN-1</td>
+                        <td id="wan1-speed-result">10 Mbps</td>
+                        <td id="wan1-ratio">10</td>
+                        <td id="wan1-numerator">1</td>
+                    </tr>
+                    <tr id="result-wan2">
+                        <td>WAN-2</td>
+                        <td id="wan2-speed-result">10 Mbps</td>
+                        <td id="wan2-ratio">10</td>
+                        <td id="wan2-numerator">1</td>
+                    </tr>
+                    <tr id="result-wan3">
+                        <td>WAN-3</td>
+                        <td id="wan3-speed-result">10 Mbps</td>
+                        <td id="wan3-ratio">10</td>
+                        <td id="wan3-numerator">1</td>
+                    </tr>
+                    <tr id="result-wan4">
+                        <td>WAN-4</td>
+                        <td id="wan4-speed-result">10 Mbps</td>
+                        <td id="wan4-ratio">10</td>
+                        <td id="wan4-numerator">1</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Total Calculate: <span id="total-calculate"></span></h3>
+            <h3>PCC Load Balancing Explanation: <span id="pcc-note"></span></h3>
+
+            <!-- Additional Results -->
+            <h3>Connections (Denominator):</h3>
+            <div id="marking-connection"></div>
+
+            <h3>Denominator Remainder:</h3>
+            <div id="denominator-remainder"></div>
+
+            <h3>Possible Speed Balance:</h3>
+            <div id="possible-speed-balance"></div>
+        </div>
+
+      
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function hitungRataRata() {
+            // Mengambil nilai dari input
+            let isp1_min = parseFloat(document.getElementById('isp1_min').value);
+            let isp1_max = parseFloat(document.getElementById('isp1_max').value);
+            let isp2_min = parseFloat(document.getElementById('isp2_min').value);
+            let isp2_max = parseFloat(document.getElementById('isp2_max').value);
+            
+            // Menghitung rata-rata ISP
+            let rataIsp1 = (isp1_min + isp1_max) / 2;
+            let rataIsp2 = (isp2_min + isp2_max) / 2;
+            
+            // Menampilkan hasil
+            document.getElementById('hasil').innerHTML = 
+                `Rata-rata kecepatan ISP 1: ${rataIsp1} Mbps<br>
+                 Rata-rata kecepatan ISP 2: ${rataIsp2} Mbps`;
+        }
+    </script>
+</body>
+</html>
